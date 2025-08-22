@@ -1,0 +1,93 @@
+.container {
+    padding: 2rem;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-geist-sans), sans-serif;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: var(--btn-background-color);
+    color: var(--btn-foreground-color);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Graph */
+.graphContainer {
+    background: var(--background);
+    border: 1px solid var(--gray-alpha-200);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Table */
+.tableContainer {
+    background: var(--background);
+    border: 1px solid var(--gray-alpha-200);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--gray-alpha-200);
+    text-align: left;
+}
+
+.table th {
+    background: var(--gray-alpha-200);
+    font-weight: 600;
+}
+
+.table tr:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+/* Status Colors */
+.paid {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+.pending {
+    color: #f59e0b;
+    font-weight: 600;
+}
+
+.overdue {
+    color: #e11d48;
+    font-weight: 600;
+}

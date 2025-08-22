@@ -1,0 +1,337 @@
+.page {
+    --glass: rgba(255, 255, 255, 0.6);
+    --glass-dark: rgba(0, 0, 0, 0.25);
+    background: var(--background, #ffffff);
+    color: var(--foreground, #111827);
+    min-height: 100vh;
+    padding: 1.2rem;
+    font-family: var(--font-geist-sans, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans");
+}
+
+/* ===== Top KPI Cards ===== */
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.kpi {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 1rem 1.1rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.08));
+    backdrop-filter: blur(6px);
+    transition: transform .15s ease, box-shadow .2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px var(--shadow, rgba(0, 0, 0, 0.12));
+}
+
+.kpiIcon {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+.kpiBody {
+    display: grid;
+}
+
+.kpiLabel {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+.kpiValue {
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: 0.2px;
+}
+
+/* Colorways */
+.kpiGreen {
+    background: linear-gradient(135deg, #D2F8D2, #B6F0C0);
+}
+
+.kpiBlue {
+    background: linear-gradient(135deg, #D7E8FF, #C7DBFF);
+}
+
+.kpiOrange {
+    background: linear-gradient(135deg, #FFE7C8, #FFD7A8);
+}
+
+.kpiPink {
+    background: linear-gradient(135deg, #FFD6E9, #FFC2DE);
+}
+
+/* ===== Charts ===== */
+.charts {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.card {
+    background: var(--card-background, rgba(255, 255, 255, 0.9));
+    border: 1px solid var(--gray-alpha-100, rgba(0, 0, 0, 0.08));
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow, rgba(0, 0, 0, 0.06));
+    overflow: hidden;
+}
+
+.cardHeader {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--gray-alpha-100, rgba(0, 0, 0, 0.08));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.chartWrap {
+    padding: 0.75rem 0.5rem 0.9rem;
+    height: 300px;
+}
+
+/* ===== Middle Grid ===== */
+.grid2x {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.activity,
+.simpleList {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.activityItem,
+.simpleList li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.7rem;
+    align-items: center;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--gray-alpha-100, rgba(0, 0, 0, 0.08));
+    border-radius: 12px;
+    background: var(--background, #ffffff);
+}
+
+.activityIcon {
+    font-size: 1.1rem;
+}
+
+.activityTop {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.activityType {
+    font-weight: 700;
+}
+
+.activityWhen {
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+.activityLabel {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.activityAmount {
+    font-weight: 800;
+}
+
+.sideCol {
+    display: grid;
+    gap: 1rem;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.dim {
+    opacity: 0.65;
+    font-size: 0.88rem;
+}
+
+.tagInfo,
+.tagWarn {
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.tagInfo {
+    background: rgba(0, 128, 255, 0.1);
+    color: #0b6bcb;
+}
+
+.tagWarn {
+    background: rgba(255, 136, 0, 0.12);
+    color: #b35c00;
+}
+
+/* ===== Quick Actions ===== */
+.quickActions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 30px;
+}
+
+.qaBtn {
+    border: 1px solid var(--gray-alpha-100, rgba(0, 0, 0, 0.08));
+    background: var(--background, #ffffff);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.qaBtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px var(--shadow, rgba(0, 0, 0, 0.08));
+}
+
+.qaPrimary {
+    background: linear-gradient(135deg, var(--btn-background-color, #2563eb), var(--button-primary-hover, #1e40af));
+    color: var(--btn-foreground-color, #fff);
+    border: none;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+    .charts {
+        grid-template-columns: 1fr;
+    }
+
+    .grid2x {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .kpis {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .quickActions {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ===== Extra Mobile Tweaks ===== */
+@media (max-width: 480px) {
+    .page {
+        padding: 0.8rem;
+    }
+
+    .kpis {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .kpi {
+        padding: 0.8rem;
+    }
+
+    .kpiLabel {
+        font-size: 0.75rem;
+    }
+
+    .kpiValue {
+        font-size: 1.1rem;
+    }
+
+    .charts {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .grid2x {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .quickActions {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+    }
+
+    .qaBtn {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .activityItem,
+    .simpleList li {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.9rem;
+    }
+
+    .cardHeader h3 {
+        font-size: 0.95rem;
+    }
+}
+
+/* =======================
+   DARK MODE SUPPORT
+======================= */
+@media (prefers-color-scheme: dark) {
+    .page {
+        background: #111827;
+        color: #f9fafb;
+    }
+
+    .kpiGreen,
+    .kpiBlue,
+    .kpiOrange,
+    .kpiPink {
+        filter: brightness(0.9);
+    }
+
+    .card,
+    .activityItem,
+    .simpleList li,
+    .quickActions .qaBtn {
+        background: #1f2937;
+        color: #f9fafb;
+        border-color: #374151;
+    }
+
+    .cardHeader {
+        border-bottom-color: #374151;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent);
+    }
+
+    .kpiLabel {
+        opacity: 0.7;
+    }
+
+    .tableContainer,
+    .table th,
+    .table td {
+        border-color: #374151;
+    }
+}

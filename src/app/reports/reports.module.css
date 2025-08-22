@@ -1,0 +1,141 @@
+.container {
+    padding: 2rem;
+    background: var(--background);
+    color: var(--foreground);
+    min-height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--primary);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.card {
+    background: var(--card-bg);
+    color: var(--card-text);
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #6b7280;
+}
+
+.card p {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Profit / Loss Variants */
+.profit {
+    color: var(--profit);
+}
+
+.loss {
+    color: var(--loss);
+}
+
+/* Graph Container */
+.graphContainer {
+    background: var(--card-bg);
+    color: var(--card-text);
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.graphContainer h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+/* Table */
+.tableContainer {
+    background: var(--card-bg);
+    color: var(--card-text);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.tableContainer h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.table th {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.table tr:hover {
+    background: #f3f4f6;
+    transition: background 0.2s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card h3 {
+        font-size: 0.9rem;
+    }
+
+    .card p {
+        font-size: 1rem;
+    }
+}

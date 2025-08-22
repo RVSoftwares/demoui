@@ -1,0 +1,10 @@
+.container {
+    width: 50vw;
+    height: 30px;
+    position: absolute;
+    z-index: 1000;
+}
+.message {
+    background-color: rgb(234, 0, 255);
+    color: rgb(0, 0, 0);
+}

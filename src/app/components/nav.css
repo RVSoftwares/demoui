@@ -1,0 +1,209 @@
+/* =======================
+   DESKTOP SIDEBAR
+======================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #f9fafb;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1.5rem;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+    color: #374151;
+    font-family: var(--font-geist-sans, 'Segoe UI', sans-serif);
+    user-select: none;
+    transition: left 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    z-index: 1000;
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: #dbeafe;
+    padding: 6px;
+}
+
+.navbar-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #111827;
+}
+
+.navbar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.navbar-menu li {
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    color: #374151;
+}
+
+.navbar-menu li:hover,
+.navbar-menu li.active {
+    background-color: #2563eb;
+    color: #ffffff;
+}
+
+.navbar-footer {
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* =======================
+   MOBILE TOP BAR
+======================= */
+.mobileview {
+    display: none;
+    /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .mobileview {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        padding: 0 16px;
+        background-color: #f9fafb;
+        border-bottom: 1px solid #e5e7eb;
+        z-index: 1200;
+    }
+
+    .mobileview .navbar-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #111827;
+        margin: 0;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 28px;
+        height: 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: static;
+    }
+
+    .hamburger span {
+        display: block;
+        height: 2.5px;
+        width: 100%;
+        background: #1f2937;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    /* .hamburger.open span:nth-child(1) {
+        transform: rotate(45deg) translateY(8px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+        transform: rotate(-45deg) translateY(-8px);
+    } */
+
+    /* Sidebar slide in/out on mobile */
+    .navbar {
+        top: 40px;
+        left: -260px;
+        width: 220px;
+        padding: 1.5rem 1rem;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar.open {
+        left: 0;
+    }
+
+    /* Overlay behind sidebar */
+    .overlay {
+        position: fixed;
+        top: 60px;
+        /* below mobile top bar */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1100;
+    }
+}
+
+/* =======================
+   DARK MODE SUPPORT
+======================= */
+@media (prefers-color-scheme: dark) {
+    .navbar {
+        background-color: #111827;
+        border-right-color: #1f2937;
+        color: #f9fafb;
+    }
+
+    .navbar-title {
+        color: #f9fafb;
+    }
+
+    .navbar-menu li {
+        color: #d1d5db;
+    }
+
+    .navbar-menu li:hover,
+    .navbar-menu li.active {
+        background-color: #2563eb;
+        color: #fff;
+    }
+
+    .hamburger span {
+        background: #f9fafb;
+    }
+
+    .navbar-footer {
+        color: #9ca3af;
+        border-top-color: #1f2937;
+    }
+
+    .mobileview {
+        background-color: #111827;
+        border-bottom: 1px solid #1f2937;
+    }
+
+    .mobileview .navbar-title {
+        color: #f9fafb;
+    }
+}
