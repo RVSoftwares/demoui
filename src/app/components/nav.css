@@ -52,7 +52,13 @@
     gap: 8px;
     font-weight: 600;
 }
-
+.menu-link-wrapper.active {
+    background-color: #2563eb;
+    color: #ffffff;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.25s ease;
+}
 .navbar-menu li {
     cursor: pointer;
     padding: 10px 14px;
