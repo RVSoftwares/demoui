@@ -40,7 +40,7 @@ const OtpPage = ({ searchParams }) => {
         console.log("OTP Submitted:", otpValue);
         console.log("OTP:", formData);
         try {
-            const response = await fetch("http://localhost:3000/api/auth/otp", {
+            const response = await fetch("https://demobackend-memw.onrender.com/api/auth/otp", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
