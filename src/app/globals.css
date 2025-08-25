@@ -3,16 +3,19 @@
   --background: #f4f7fa;
   --foreground: #1e1e2f;
 
-  --btn-background-color: #2563eb; /* Modern blue */
+  --btn-background-color: #2563eb;
+  /* Modern blue */
   --btn-foreground-color: #ffffff;
-
-  --nav-background: #002488; /* Deep blue */
+  --btn-background-disabled-color:rgba(28, 60, 129, 0.301)eb;
+  --nav-background: #002488;
+  /* Deep blue */
   --nav-foreground: #ffffff;
 
   --card-background: #ffffff;
   --card-foreground: #1f2937;
 
-  --accent: #ffffff; /* Teal accent */
+  --accent: #ffffff;
+  /* Teal accent */
   --accent-hover: #464444;
 
   --gray-rgb: 0, 0, 0;
@@ -22,6 +25,46 @@
   --button-primary-hover: #1d4ed8;
   --button-secondary-hover: #e5e7eb;
   --shadow: rgba(0, 0, 0, 0.1);
+
+  /* waterloader */
+  --drop-color: #002d57;
+  --glow-color: rgb(2, 0, 146);
+}
+
+/* scrollbar design */
+/* Scrollbar container */
+/* Hide scrollbar but keep scrolling */
+html,
+body {
+  overflow: auto;
+  /* enable scrolling */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Chrome, Safari, Edge */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.navbar-load-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* full screen */
+  width: 100%;
+  background-color: var(--bg, #5d7b99);
+  /* optional, can be transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  /* above everything */
+  transition: opacity 0.3s ease;
 }
 
 /* Dark theme */
@@ -79,6 +122,7 @@ a {
   color: var(--accent);
   text-decoration: none;
 }
+
 a:hover {
   color: var(--accent-hover);
 }
@@ -91,7 +135,7 @@ a:hover {
 }
 
 /* Sidebar */
-.layout-container > nav {
+.layout-container>nav {
   width: 250px;
   flex-shrink: 0;
   background: var(--nav-background);
@@ -118,17 +162,24 @@ a:hover {
   box-shadow: 0 4px 12px var(--shadow);
   transition: transform 0.2s ease;
 }
+
 .card:hover {
   transform: translateY(-2px);
 }
 
 /* Responsive */
+@media (max-width: 458px) {
+    .layout-main {
+        padding-top: 2rem;
+        margin-left: 0;
+      }
+}
 @media (max-width: 768px) {
   .layout-container {
     flex-direction: column;
   }
 
-  .layout-container > nav {
+  .layout-container>nav {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--gray-alpha-100);
@@ -136,7 +187,10 @@ a:hover {
   }
 
   .layout-main {
-    padding: 1rem;
+    padding-top: 2rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    padding-bottom: 0rem;
     margin-left: 0;
   }
 }

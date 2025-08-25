@@ -1,40 +1,43 @@
 "use client";
 import "./nav.css";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "../context/contextapi.js";
 
 const Navbar = () => {
+    const { isDarkMode, authtoken, loading, setloading } = useContext(AppContext);
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const router = useRouter();
+    const [menuItems, setMenuItems] = useState([]);
 
-    // Detect system theme
+    // Update menu items based on auth token
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        setIsDarkMode(mediaQuery.matches);
+        if (authtoken) {
+            setMenuItems([
+                { label: "Home", path: "/" },
+                { label: "Dashboard", path: "/dashboard" },
+                { label: "Sales Management", path: "/sales" },
+                { label: "Stock Management", path: "/stock" },
+                { label: "Service Reminders", path: "/service" },
+                { label: "AMC Management", path: "/amc" },
+                { label: "Payment Dues", path: "/payments" },
+                { label: "Supplier Management", path: "/suppliers" },
+                { label: "Reports", path: "/reports" },
+                { label: "Profile", path: "/profile" },
+                { label: "Logout", path: "/logout" },
+            ]);
+        } else {
+            setMenuItems([{ label: "Login", path: "/login" }]);
+        }
 
-        const handler = (e) => setIsDarkMode(e.matches);
-        mediaQuery.addEventListener("change", handler);
-
-        return () => mediaQuery.removeEventListener("change", handler);
-    }, []);
-    const menuItems = [
-        { label: "Dashboard", path: "/dashboard" },
-        { label: "Sales Management", path: "/sales" },
-        { label: "Stock Management", path: "/stock" },
-        { label: "Service Reminders", path: "/service" },
-        { label: "AMC Management", path: "/amc" },
-        { label: "Payment Dues", path: "/payments" },
-        { label: "Supplier Management", path: "/suppliers" },
-        { label: "Reports", path: "/reports" },
-        { label: "Profile", path: "/profile" },
-        { label: "Login", path: "/login" },
-    ];
+        // Stop loading once menu items are set
+        setloading(false);
+    }, [authtoken, setloading]);
 
     return (
         <>
-            {/* Hamburger button */}
+            {/* Hamburger button for mobile */}
             <div className="mobileview">
                 <button
                     className={`hamburger ${isOpen ? "open" : ""}`}
@@ -52,29 +55,43 @@ const Navbar = () => {
             {/* Sidebar */}
             <aside className={`navbar ${isOpen ? "open" : ""}`}>
                 <div className="navbar-header">
-                    <img
-                        src={isDarkMode ? "/white.png" : "/dark.png"}
-                        alt="logo"
-                        className="logo"
-                    />
+                    <img src={isDarkMode ? "/white.png" : "/dark.png"} alt="logo" className="logo" />
                     <p className="navbar-title">Goyal RO Service</p>
                 </div>
-                <nav>
-                    <ul className="navbar-menu">
-                        {menuItems.map((item) => (
-                            <Link
-                                key={item.path}
-                                href={item.path}
-                                onClick={() => setIsOpen(false)}
-                                className={`menu-link-wrapper ${pathname === item.path ? "active" : ""}`}
-                            >
-                                <li>
+                {loading ? (
+                    <div className="load-container">
+                        <img
+                            src={"/transparantload.svg"}
+                            alt="Loading..."
+                            className="spinner"
+                            width={100}
+                            height={100}
+                        />
+                    </div>
+                ) : (
+                    <nav>
+                        {!authtoken && (
+                            <p className="logout-text-navbar">
+                                    <b>WELCOME TO GOYAL RO SERVICE</b> <br /> <u> LOGIN TO CONTINUE</u>
+                            </p>
+                        )}
+                        <ul className="navbar-menu">
+                            {menuItems.map((item) => (
+                                <li
+                                    key={item.path}
+                                    className={`menu-item ${pathname === item.path ? "active" : ""}`}
+                                    onClick={() => {
+                                        router.push(item.path);
+                                        setIsOpen(false);
+                                    }}
+                                    style={{ cursor: "pointer" }}
+                                >
                                     {item.label}
                                 </li>
-                            </Link>
-                        ))}
-                    </ul>
-                </nav>
+                            ))}
+                        </ul>
+                    </nav>
+                )}
                 <footer className="navbar-footer">
                     &copy; {new Date().getFullYear()} Goyal RO Service
                 </footer>

@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar"; // your existing Navbar
-
+import { AppProvider } from "./context/contextapi.js"; // import your context
+import ClientLoadingBar from "./components/loadbar";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -21,10 +22,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} layout-body`}>
-        <div className="layout-container">
-          <Navbar />
-          <main className="layout-main">{children}</main>
-        </div>
+        <AppProvider>
+          <div className="layout-container">
+            <ClientLoadingBar />
+            <Navbar />
+            <main className="layout-main">{children}</main>
+          </div>
+        </AppProvider>
       </body>
     </html>
   );

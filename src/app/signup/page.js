@@ -1,126 +1,114 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./signup.module.css";
-
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AppContext } from "../context/contextapi";
 const SignupPage = () => {
+    const { loading, setloading } = useContext(AppContext);
     const [formData, setFormData] = useState({
-        fullName: "",
+        name: "",
         username: "",
-        userId: "",
         email: "",
-        mobile: "",
         password: "",
         confirmPassword: "",
     });
+    const [signtxt, setSigntxt] = useState("Sign up");
+    const [error, setError] = useState("");
+    const router = useRouter();
 
-    const [errors, setErrors] = useState({});
+    const handleChange = (e) =>
+        setFormData({ ...formData, [e.target.name]: e.target.value });
 
-    // Validation rules
-    const validateField = (name, value) => {
-        switch (name) {
-            case "fullName":
-                if (!value.trim()) return "Full name is required";
-                break;
-            case "username":
-                if (!value.trim()) return "Username is required";
-                if (value.length < 3) return "Username must be at least 3 characters";
-                break;
-            case "userId":
-                if (!value.trim()) return "User ID is required";
-                break;
-            case "email":
-                if (!value.trim()) return "Email is required";
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
-                    return "Enter a valid email";
-                break;
-            case "mobile":
-                if (!value.trim()) return "Mobile number is required";
-                if (!/^\d{10}$/.test(value))
-                    return "Mobile number must be 10 digits";
-                break;
-            case "password":
-                if (!value.trim()) return "Password is required";
-                if (value.length < 6) return "Password must be at least 6 characters";
-                break;
-            case "confirmPassword":
-                if (!value.trim()) return "Please confirm your password";
-                if (value !== formData.password) return "Passwords do not match";
-                break;
-            default:
-                return "";
-        }
-        return "";
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        });
-
-        // Live validation for the changed field
-        setErrors({
-            ...errors,
-            [name]: validateField(name, value),
-        });
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const newErrors = {};
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match");
+            return;
+        }
+        setError("");
+        setloading(true);
+        setSigntxt("Signing up...");
+        try {
+            const response = await fetch("http://localhost:3000/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
 
-        // Validate all fields
-        Object.keys(formData).forEach((key) => {
-            const error = validateField(key, formData[key]);
-            if (error) newErrors[key] = error;
-        });
-
-        setErrors(newErrors);
-
-        // If no errors, proceed
-        if (Object.keys(newErrors).length === 0) {
-            console.log("Form data submitted:", formData);
-            // send to backend here
+            if (!response.ok) {
+                setError(data.error || "Signup failed");
+                return;
+            }
+            router.replace(`/otp?email=${encodeURIComponent(formData.email)}`);
+        } catch (err) {
+            setError(err.message || "Something went wrong");
+            console.error(err);
+        } finally {
+            setloading(false);
+            setSigntxt("Sign up");
         }
     };
 
     return (
         <div className={styles.signupContainer}>
             <h2 className={styles.signupTitle}>Create Your Account</h2>
-            <form className={styles.signupForm} onSubmit={handleSubmit}>
-                {[
-                    { name: "fullName", type: "text", placeholder: "Full Name" },
-                    { name: "username", type: "text", placeholder: "Username" },
-                    { name: "userId", type: "text", placeholder: "User ID" },
-                    { name: "email", type: "email", placeholder: "Email Address" },
-                    { name: "mobile", type: "tel", placeholder: "Mobile Number" },
-                    { name: "password", type: "password", placeholder: "Password" },
-                    { name: "confirmPassword", type: "password", placeholder: "Confirm Password" },
-                ].map((field) => (
-                    <div key={field.name} className={styles.inputGroup}>
-                        <input
-                            name={field.name}
-                            type={field.type}
-                            value={formData[field.name]}
-                            onChange={handleChange}
-                            placeholder={field.placeholder}
-                            className={`${styles.signupInput} ${errors[field.name] ? styles.errorInput : ""
-                                }`}
-                            required
-                        />
-                        {errors[field.name] && (
-                            <span className={styles.errorText}>{errors[field.name]}</span>
-                        )}
-                    </div>
-                ))}
 
-                <button className={styles.signupButton} type="submit">
-                    Sign Up
+            <form className={styles.signupForm} onSubmit={handleSubmit}>
+                <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} className={styles.signupInput} required
+                />
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    className={styles.signupInput}
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={styles.signupInput}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className={styles.signupInput}
+                    required
+                />
+                <input
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className={styles.signupInput}
+                    required
+                />
+
+                {error && <p className={styles.errorText}>{error}</p>}
+
+                <button
+                    type="submit"
+                    className={styles.signupButton}
+                    disabled={loading}
+                >
+                    {signtxt}
                 </button>
             </form>
+
             <p className={styles.signupNote}>
-                Already have an account? <a href="/login">Log in</a>
+                Already have an account? <Link href="/login">Log in</Link>
             </p>
         </div>
     );

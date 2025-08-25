@@ -1,11 +1,13 @@
+"use client";
+import React, { useContext } from "react";
 import styles from "./page.module.css";
 import Navbar from "./components/navbar";
-import Dashboard from "./dashboard/page"; // import dashboard page component
+import LoggedOut from "./loggedout/loggedout";
 export default function Home() {
   return (
     <div className={styles.page}>
       <Navbar />
-      <Dashboard/>
+      <LoggedOut />
     </div>
   );
 }

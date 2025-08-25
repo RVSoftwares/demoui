@@ -5,6 +5,7 @@
     background-color: var(--background);
     color: var(--foreground);
     padding: 2rem;
+    margin-top: 100px;
     border-radius: 12px;
     max-width: 400px;
     margin: 4rem auto;
@@ -67,7 +68,11 @@
 .forgot:hover {
     text-decoration: underline;
 }
-
+.errorText {
+    font-size: 0.8rem;
+    color: #e63946;
+    margin-left: 2px;
+}
 /* Login button */
 .button {
     background-color: var(--btn-background-color);
@@ -79,7 +84,9 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
 }
-
+.button:disabled{
+        background-color: var(--btn-background-disabled-color);
+}
 .button:hover {
     background-color: var(--button-primary-hover);
 }
@@ -104,8 +111,9 @@
 /* ===== Responsive tweaks ===== */
 @media (max-width: 600px) {
     .container {
-        margin: 2rem 1rem;
+        margin: 2rem auto;
         padding: 1.5rem;
+        margin-top: 100px;
     }
 
     .options {

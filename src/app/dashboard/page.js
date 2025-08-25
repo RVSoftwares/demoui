@@ -1,6 +1,10 @@
 "use client";
 import { useMemo } from "react";
 import styles from "./dashboard.module.css";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { AppContext } from "../context/contextapi";
 import {
     ResponsiveContainer,
     BarChart,
@@ -15,6 +19,8 @@ import {
 } from "recharts";
 
 export default function Dashboard() {
+    const { authtoken } = useContext(AppContext);
+    const router = useRouter();
     // --- Dummy Data (replace with API later) ---
     const dailySales = [
         { day: "Mon", sales: 12000, expenses: 4000, profit: 8000 },
@@ -101,8 +107,6 @@ export default function Dashboard() {
             <section className={styles.quickActions}>
                 <button className={`${styles.qaBtn} ${styles.qaPrimary}`}>+ Add Sale</button>
                 <button className={styles.qaBtn}>+ Add Stock</button>
-                <button className={styles.qaBtn}>+ Schedule Service</button>
-                <button className={styles.qaBtn}>💳 Record Payment</button>
             </section>
             <section className={styles.kpis}>
                 <div className={`${styles.kpi} ${styles.kpiGreen}`}>
@@ -117,7 +121,7 @@ export default function Dashboard() {
                     <div className={styles.kpiIcon}>📆</div>
                     <div className={styles.kpiBody}>
                         <span className={styles.kpiLabel}>Monthly Profit (YTD)</span>
-                        <span className={styles.kpiValue}>₹{monthlyProfitTotal.toLocaleString()}</span>
+                        <span className={styles.kpiValue}>₹{monthlyProfitTotal.toLocaleString('en-IN')}</span>
                     </div>
                 </div>
 

@@ -1,0 +1,140 @@
+/* Container */
+.container {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f9fafb, #9fabc7);
+    text-align: center;
+    padding: 2rem;
+    font-family: "Inter", sans-serif;
+}
+
+.dark {
+    background: linear-gradient(135deg, #1f2937, #111827);
+    color: #f3f4f6;
+}
+
+/* Logo / Image */
+.logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Title */
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.dark .title {
+    color: #fff;
+}
+
+.highlight {
+    color: #2563eb;
+}
+
+/* Subtitle */
+.subtitle {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+.dark .subtitle {
+    color: #d1d5db;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 1.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Primary (Login) */
+.btnPrimary {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.btnPrimary:hover {
+    background: #1e40af;
+}
+
+/* Secondary (Sign Up) */
+.btnSecondary {
+    background: transparent;
+    border: 1px solid #9ca3af;
+    color: #374151;
+}
+
+.btnSecondary:hover {
+    background: #f3f4f6;
+}
+
+.dark .btnSecondary {
+    border-color: #6b7280;
+    color: #e5e7eb;
+}
+
+.dark .btnSecondary:hover {
+    background: #374151;
+}
+
+/* Footer */
+.footer {
+    margin-top: 3rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+
+/* Small devices (max-width: 640px) */
+@media (max-width: 600px) {
+    .btnSecondary {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .footer {
+        margin-top: 2rem;
+        font-size: 0.75rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .container {
+        min-height: 80vh;
+    }
+}
