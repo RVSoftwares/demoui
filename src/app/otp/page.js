@@ -1,11 +1,9 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import styles from "./otp.module.css";
-import { useRouter, useSearchParams } from "next/navigation";
-
-import { useContext } from "react";
+import { useRouter } from "next/navigation";
 import { AppContext } from "../context/contextapi";
-const OtpPage = () => {
+const OtpPage = ({ searchParams }) => {
     const { authtoken, setauthtoken } = useContext(AppContext);
     const [otpp, setOtpp] = useState(new Array(6).fill(""));
     const inputRefs = useRef([]);
@@ -29,13 +27,9 @@ const OtpPage = () => {
             inputRefs.current[index - 1].focus();
         }
     };
-
-    const searchParams = useSearchParams();
-    const email = searchParams.get("email");
+    const email = searchParams?.email || "";
     const otp = otpp.join("");
-    const formData = {
-        otp, email
-    }
+    const formData = { otp, email };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const otpValue = otpp.join("");
@@ -46,7 +40,6 @@ const OtpPage = () => {
         console.log("OTP Submitted:", otpValue);
         console.log("OTP:", formData);
         try {
-
             const response = await fetch("http://localhost:3000/api/auth/otp", {
                 method: "POST",
                 headers: {
@@ -59,8 +52,8 @@ const OtpPage = () => {
                 console.log(data);
                 localStorage.setItem("token", data.token);
                 const token = localStorage.getItem("token", data.token);
-                setauthtoken(token)
-                router.push('/dashboard');
+                setauthtoken(token);
+                router.push("/dashboard");
             }
         } catch (error) {
             console.log(error);
