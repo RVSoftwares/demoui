@@ -2,10 +2,12 @@
 import { useState } from "react";
 import "./addstock.css";
 import { useContext } from "react";
+import { toast } from 'react-toastify'
 import { AppContext } from "../context/contextapi.js";
 export default function AddStockPage(props) {
-    const { loading,setloading } = useContext(AppContext);
+    const { loading, setloading } = useContext(AppContext);
     const { appear, setappear } = props;
+    const today = new Date().toISOString().split("T")[0]
     const [form, setForm] = useState({
         productName: "",
         productType: "",
@@ -14,10 +16,10 @@ export default function AddStockPage(props) {
         quantity: "",
         thresholdQuantity: "",
         supplier: "",
-        purchaseDate: "",
+        purchaseDate: today,
         paymentMode: "",
-        amountPaid: "",
-        amountPending: "",
+        amountPaid: ""
+
     });
 
     const [Message, setMessage] = useState("");
@@ -25,11 +27,15 @@ export default function AddStockPage(props) {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
+    const totalPrice = form.price && form.quantity ? Number(form.price) * Number(form.quantity) : " ";
+    const amountPending = totalPrice && form.amountPaid ? totalPrice - Number(form.amountPaid) : totalPrice;
     const payload = {
         ...form,
         price: Number(form.price),
         quantity: Number(form.quantity),
         thresholdQuantity: Number(form.thresholdQuantity),
+        totalPrice,
+        amountPending,
     };
 
     const handleSubmit = async (e) => {
@@ -38,7 +44,7 @@ export default function AddStockPage(props) {
         console.log("📦 Sending form data:", form);
 
         try {
-            const res = await fetch("http://localhost:3001/api/stock/add", {
+            const res = await fetch("https://demobackend-memw.onrender.com/api/stock/add", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
@@ -47,6 +53,7 @@ export default function AddStockPage(props) {
             const data = await res.json();
             if (res.ok) {
                 setloading(false)
+                toast.success("✅ Stock added successfully!")
                 setMessage("✅ Stock added successfully!");
                 setForm({
                     productName: "",
@@ -56,14 +63,26 @@ export default function AddStockPage(props) {
                     quantity: "",
                     thresholdQuantity: "",
                     supplier: "",
-                    purchaseDate: "",
+                    purchaseDate: today,
                     paymentMode: "",
+                    totalPrice: "",
                     amountPaid: "",
                     amountPending: "",
                 });
+                setTimeout(() => {
+                    // setloading(false)
+                    setMessage("");
+                    setappear(false);
+                }, 2000);
             } else {
                 console.log(data.messsage)
+                toast.error(data.message)
                 setMessage(`❌ Error: ${data.message || "Failed to add stock"}`);
+                setTimeout(() => {
+                    setMessage("");
+                    setloading(false)
+                    setappear(false)
+                }, 2000);
             }
         } catch (err) {
             console.error(err);
@@ -97,9 +116,10 @@ export default function AddStockPage(props) {
                                 <option value="upi">UPI</option>
                                 <option value="bank">Bank Transfer</option>
                             </select>
+                            <input type="number" name="totalprice" placeholder="Total Price" value={totalPrice} readOnly />
                             <input type="number" name="amountPaid" placeholder="Amount Paid" value={form.amountPaid} onChange={handleChange} />
-                            <input type="number" name="amountPending" placeholder="Amount Pending" value={form.amountPending} onChange={handleChange} />
-                        <button type="submit" className="button">{loading ? "Adding..." : "Add Stock"}</button>
+                            <input type="number" name="amountPending" placeholder="Amount Pending" value={amountPending} readOnly />
+                            <button type="submit" className="button">{loading ? "Adding..." : "Add Stock"}</button>
                         </form>
 
                         {Message && <p className={'message'}>{Message}</p>}

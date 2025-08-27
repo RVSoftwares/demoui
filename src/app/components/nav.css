@@ -125,7 +125,7 @@
     /* hidden on desktop */
 }
 
-@media (max-width: 608px) {
+@media (max-width: 768px ) {
     .navbar-menu li {
         margin-top: 7px;
         text-align: center;
@@ -136,6 +136,7 @@
         color: #000000;
         background-color: rgb(255, 255, 255);
     }
+
     .mobileview {
         display: flex;
         align-items: center;
@@ -178,6 +179,7 @@
         border-radius: 2px;
         transition: all 0.3s ease;
     }
+
     /* Sidebar slide in/out on mobile */
     .navbar {
         top: 40px;

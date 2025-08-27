@@ -14,5 +14,5 @@ export default function ClientLoadingBar() {
         }
     }, [pathname]);
 
-    return <LoadingBar color="#0077ffff" shadow='false' ref={ref} />;
+    return <LoadingBar color="#ff0000ff" shadow='true' ref={ref} />;
 }
