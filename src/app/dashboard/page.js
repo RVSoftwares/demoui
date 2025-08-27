@@ -1,26 +1,21 @@
 "use client";
 import { useMemo } from "react";
 import styles from "./dashboard.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { AppContext } from "../context/contextapi";
-import {
-    ResponsiveContainer,
-    BarChart,
-    Bar,
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-} from "recharts";
-
+import AddStockPage from "../components/addstock";
+import { ResponsiveContainer, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 export default function Dashboard() {
+    const [showAddStock, setShowAddStock] = useState(false);
     const { authtoken } = useContext(AppContext);
     const router = useRouter();
+    const [appear, setappear] = useState(false)
+    const handleclick = () => {
+        setappear(true);
+        console.log("clicked")
+    }
     // --- Dummy Data (replace with API later) ---
     const dailySales = [
         { day: "Mon", sales: 12000, expenses: 4000, profit: 8000 },
@@ -102,12 +97,11 @@ export default function Dashboard() {
     return (
 
         <div className={styles.page}>
-            {/* Top Stats */}
-            {/* Quick Actions */}
             <section className={styles.quickActions}>
                 <button className={`${styles.qaBtn} ${styles.qaPrimary}`}>+ Add Sale</button>
-                <button className={styles.qaBtn}>+ Add Stock</button>
+                <button className={styles.qaBtn} onClick={handleclick}> + Add Stock </button>
             </section>
+
             <section className={styles.kpis}>
                 <div className={`${styles.kpi} ${styles.kpiGreen}`}>
                     <div className={styles.kpiIcon}>💰</div>
@@ -252,6 +246,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             </section>
+            <AddStockPage appear={appear} setappear={setappear} />
         </div>
     );
 }

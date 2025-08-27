@@ -49,14 +49,14 @@ const Navbar = () => {
                     <span></span>
                     <span></span>
                 </button>
-                <p className="navbar-title">Goyal RO Service</p>
+                <p className="navbar-title">Goyal Sales RO</p>
             </div>
 
             {/* Sidebar */}
             <aside className={`navbar ${isOpen ? "open" : ""}`}>
                 <div className="navbar-header">
                     <img src={isDarkMode ? "/white.png" : "/dark.png"} alt="logo" className="logo" />
-                    <p className="navbar-title">Goyal RO Service</p>
+                    <p className="navbar-title">Goyal Sales RO</p>
                 </div>
                 {loading ? (
                     <div className="load-container">
@@ -72,7 +72,7 @@ const Navbar = () => {
                     <nav>
                         {!authtoken && (
                             <p className="logout-text-navbar">
-                                    <b>WELCOME TO GOYAL RO SERVICE</b> <br /> <u> LOGIN TO CONTINUE</u>
+                                    <b>WELCOME TO Goyal Sales RO</b> <br /> <u> LOGIN TO CONTINUE</u>
                             </p>
                         )}
                         <ul className="navbar-menu">
@@ -93,7 +93,7 @@ const Navbar = () => {
                     </nav>
                 )}
                 <footer className="navbar-footer">
-                    &copy; {new Date().getFullYear()} Goyal RO Service
+                    &copy; {new Date().getFullYear()} Goyal Sales RO
                 </footer>
             </aside>
         </>

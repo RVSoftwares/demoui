@@ -8,7 +8,7 @@
     width: 260px;
     height: 100vh;
     overflow-y: scroll;
-    background-color: #5095da;
+    background-color: #4692dd;
     border-right: 1px solid #e5e7eb;
     display: flex;
     flex-direction: column;
@@ -146,7 +146,7 @@
         right: 0;
         height: 40px;
         padding: 0 16px;
-        background-color: #f9fafb;
+        background-color: var(--nav-background);
         border-bottom: 1px solid #e5e7eb;
         z-index: 1200;
     }
@@ -154,7 +154,7 @@
     .mobileview .navbar-title {
         font-size: 1.1rem;
         font-weight: 700;
-        color: #111827;
+        color: #ffffff;
         margin: 0;
     }
 
@@ -172,9 +172,9 @@
 
     .hamburger span {
         display: block;
-        height: 2.5px;
-        width: 100%;
-        background: #1f2937;
+        height: 2px;
+        width: 90%;
+        background: #ffffff;
         border-radius: 2px;
         transition: all 0.3s ease;
     }

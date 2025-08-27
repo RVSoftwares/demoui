@@ -6,8 +6,8 @@
   --btn-background-color: #2563eb;
   /* Modern blue */
   --btn-foreground-color: #ffffff;
-  --btn-background-disabled-color:rgba(28, 60, 129, 0.301);
-  --nav-background: #002488;
+  --btn-background-disabled-color: rgba(28, 60, 129, 0.301);
+  --nav-background: #4692dd;
   /* Deep blue */
   --nav-foreground: #ffffff;
 
@@ -29,6 +29,9 @@
   /* waterloader */
   --drop-color: #002d57;
   --glow-color: rgb(2, 0, 146);
+  --modal-bg: rgba(255, 255, 255, 0.2);
+  --modal-border: rgba(255, 255, 255, 0.3);
+  --text-color: #111827;
 }
 
 /* scrollbar design */
@@ -92,6 +95,9 @@ body::-webkit-scrollbar {
     --button-primary-hover: #3b82f6;
     --button-secondary-hover: #334155;
     --shadow: rgba(255, 255, 255, 0.08);
+    --modal-bg: rgba(17, 24, 39, 0.3);
+    --modal-border: rgba(255, 255, 255, 0.1);
+    --text-color: #f9fafb;
   }
 }
 
@@ -169,11 +175,12 @@ a:hover {
 
 /* Responsive */
 @media (max-width: 458px) {
-    .layout-main {
-        padding-top: 2rem;
-        margin-left: 0;
-      }
+  .layout-main {
+    padding-top: 2rem;
+    margin-left: 0;
+  }
 }
+
 @media (max-width: 768px) {
   .layout-container {
     flex-direction: column;

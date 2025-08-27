@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import styles from "./page.module.css";
 import Navbar from "./components/navbar";
 import LoggedOut from "./loggedout/loggedout";

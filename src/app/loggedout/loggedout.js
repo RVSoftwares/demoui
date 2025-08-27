@@ -14,7 +14,7 @@ export default function LoggedOut() {
                 className={styles.logo}
             />
             <h1 className={styles.title}>
-                Welcome to <span className={styles.highlight}>Goyal RO Service</span>
+                Welcome to <span className={styles.highlight}>Goyal Sales RO</span>
             </h1>
             <p className={styles.subtitle}>
                 Manage your sales, stock, and services with ease.
@@ -32,7 +32,7 @@ export default function LoggedOut() {
                 </div>}
 
             <footer className={styles.footer}>
-                &copy; {new Date().getFullYear()} Goyal RO Service. All rights reserved.
+                &copy; {new Date().getFullYear()} Goyal Sales RO. All rights reserved.
             </footer>
         </div>
     );

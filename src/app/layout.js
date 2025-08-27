@@ -17,7 +17,9 @@ export const metadata = {
   title: "RO",
   description: "Here is a web for RO service",
 };
-
+export const viewport = {
+  themeColor: "#4692dd",
+};
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
